@@ -1,7 +1,7 @@
 FROM ubuntu:24.04
-LABEL maintainer="michelfang <yingchih.fang@gmail.com>"
+LABEL maintainer="antonio molnari <antoniomolinari@me.com>"
 #==================================================================
-#MODIFY YOUR DB CONFIG in src/fusionpbx-install.sh/ubuntu/resource/conig.sh
+#MODIFY YOUR DB CONFIG in src/fusionpbx-install.sh/ubuntu/resource/config.sh
 #==================================================================
 
 ##########################

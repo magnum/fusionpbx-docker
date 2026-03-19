@@ -1,8 +1,9 @@
+source .env
 
 # FusionPBX Settings
-domain_name=ip_address                      # hostname, ip_address or a custom value
+domain_name=$DOMAIN_NAME                      # hostname, ip_address or a custom value
 system_username=admin                       # default username admin
-system_password=password               # dont forget to change password
+system_password=$ADMIN_PASSWORD               # dont forget to change password
 system_branch=5.4                           # master, 5.4
 
 # FreeSWITCH Settings
@@ -11,7 +12,7 @@ switch_source=true                          # true (source compile) or false (bi
 switch_package=false                        # true (binary package) or false (source compile)
 switch_version=1.10.12                      # which source code to download, only for source
 switch_tls=true                             # true or false
-switch_token=                               # Get the auth token from https://signalwire.com
+switch_token=$SIGNALWIRE_TOKEN                            # Get the auth token from https://signalwire.com
                                             # Signup or Login -> Profile -> Personal Auth Token
 # Sofia-Sip Settings
 sofia_version=1.13.17                       # release version for sofia-sip to use
@@ -19,11 +20,11 @@ sofia_version=1.13.17                       # release version for sofia-sip to u
 # Database Settings
 database_name=fusionpbx                     # Database name (safe characters A-Z, a-z, 0-9)
 database_username=fusionpbx                 # Database username (safe characters A-Z, a-z, 0-9)
-database_password=password             # dont forget to change password
+database_password=$DATABASE_PASSWORD            # dont forget to change password
 #system =apt install  postgres 
 database_repo=system                        # PostgreSQL official, system
 database_version=18                         # requires repo official
-database_host=ip_address                    # hostname or IP address
+database_host=$DATABASE_HOST                    # hostname or IP address
 database_port=5432                          # port number
 database_backup=false                       # true or false
 

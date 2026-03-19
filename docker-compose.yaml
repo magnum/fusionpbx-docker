@@ -3,17 +3,24 @@ services:
     # Build the image from the local Dockerfile so the local modified installer
     # (copied from workspace) is included in the image.
     # you can build by yourself
-    #build:
-    #  context: .
-    #  dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
     
     #using docker hub image
     #fusionpbx 5.2 is old theme(5.4 is new theme)
-    image: michaelfangtw/fusionpbx-docker:5.4
+    #image: michaelfangtw/fusionpbx-docker:5.4
 
     # Use host networking to allow the container to access all host ports.
     # This is necessary for the large RTP port range.
-    network_mode: "host"
+    #network_mode: "host"
+    ports:
+      - "80:80"
+    #  - "443:443"
+      - "5060:5060/tcp"
+      - "5060:5060/udp"
+      - "5080:5080/tcp"
+      - "16384-16420:16384-16420/udp"
 
     # Set the container name for eaml: line 7: did not find expected key
     container_name: fusionpbx
@@ -25,9 +32,15 @@ services:
     # Persist fusionpbx webapp, configs and FreeSWITCH autoload configs on the host
     volumes:
       - ./config/fusionpbx:/etc/fusionpbx
+      - ./config/nginx_fusionpbx.conf:/etc/nginx/sites-enabled/fusionpbx
+      #- ./postgres/:/var/lib/postgresql/
 
-    #
-    # Maps to the /usr/sbin/init command. This is the main process for the container.
+    environment:
+      - DOMAIN_NAME=$DOMAIN_NAME
+      - DATABASE_HOST=$DATABASE_HOST
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - ADMIN_PASSWORD=$ADMIN_PASSWORD
+      - SIGNALWIRE_TOKEN=$SIGNALWIRE_TOKEN
+
     entrypoint: ["/usr/sbin/init"]
-
 
